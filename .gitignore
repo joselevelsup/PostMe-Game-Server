@@ -16,6 +16,9 @@ firebase-debug.log*
 # it commented so all members can deploy to the same project(s) in .firebaserc.
 # .firebaserc
 
+#Post me Service account
+postmee-adminsdk.json
+
 # Runtime data
 pids
 *.pid
@@ -63,3 +66,7 @@ node_modules/
 
 # dotenv environment variables file
 .env
+
+# vim tags
+tags
+tags.*

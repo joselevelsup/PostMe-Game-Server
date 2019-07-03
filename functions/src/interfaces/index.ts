@@ -26,8 +26,6 @@ export interface IRoom {
 	roomNumber: string;
 	passwordEnabled: boolean;
 	password?: string;
-	members?: object;
-	isPrivate?: boolean; 
 	roomType: string;
 	game?: IGame;
 }

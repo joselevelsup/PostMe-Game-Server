@@ -2,7 +2,11 @@ import * as functions from 'firebase-functions';
 import * as admin from "firebase-admin";
 
 import { IUserSettings } from "./interfaces";
-import { createARoom, onRoomCreation } from './rooms';
+import { 
+	createARoom, 
+	onRoomCreation, 
+	getARoom 
+} from './rooms';
 import { createAGame } from "./games";
 
 admin.initializeApp();
@@ -27,6 +31,8 @@ export const createGame = functions.https.onCall(createAGame);
 // export const seeAllPosts = functions.https.onCall(getAllPosts);
 
 // Rooms
+export const getRoom = functions.https.onRequest(getARoom);
 export const createRoom = functions.https.onCall(createARoom);
+
 export const onRoomCreate = functions.database.ref("/rooms/{roomId}").onCreate(onRoomCreation);
 

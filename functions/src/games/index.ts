@@ -14,7 +14,7 @@ export const createAGame = (data: any, context: any) => {
 			gameStatus: GameStatus.Started
 		}
 	};
-	gameDb.push(gameData).then(() => {
+	return gameDb.push(gameData).then(() => {
 		console.log("game created");
 	});
 }
