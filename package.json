@@ -1,0 +1,35 @@
+{
+   "name": "postme-server",
+   "version": "1.0.0",
+   "description": "",
+   "main": "index.js",
+   "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "start": "ts-node src/index.ts"
+   },
+   "repository": {
+      "type": "git",
+      "url": "git+https://github.com/joselevelsup/PostMe-Game-Server.git"
+   },
+   "keywords": [],
+   "author": "",
+   "license": "ISC",
+   "bugs": {
+      "url": "https://github.com/joselevelsup/PostMe-Game-Server/issues"
+   },
+   "homepage": "https://github.com/joselevelsup/PostMe-Game-Server#readme",
+   "dependencies": {
+      "bcrypt": "^3.0.6",
+      "mongodb": "^3.2.7",
+      "reflect-metadata": "^0.1.10",
+      "restify": "^8.3.3",
+      "typeorm": "0.2.18"
+   },
+   "devDependencies": {
+      "@types/mongodb": "^3.1.28",
+      "@types/node": "^8.0.29",
+      "@types/restify": "^7.2.11",
+      "ts-node": "^3.3.0",
+      "typescript": "3.3.3333"
+   }
+}
