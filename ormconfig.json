@@ -3,8 +3,9 @@
    "database": "test",
    "synchronize": true,
    "logging": false,
+	 "useNewUrlParser": true,
    "entities": [
-      "src/entity/**/*.ts"
+      "build/entity/**/*.js"
    ],
    "migrations": [
       "src/migration/**/*.ts"

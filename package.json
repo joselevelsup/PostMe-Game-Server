@@ -2,10 +2,12 @@
    "name": "postme-server",
    "version": "1.0.0",
    "description": "",
-   "main": "index.js",
+   "main": "build/index.js",
    "scripts": {
       "test": "echo \"Error: no test specified\" && exit 1",
-      "start": "ts-node src/index.ts"
+      "start:dev": "ts-node src/index.ts",
+      "start": "node build/index.js",
+      "build": "tsc"
    },
    "repository": {
       "type": "git",
@@ -20,12 +22,20 @@
    "homepage": "https://github.com/joselevelsup/PostMe-Game-Server#readme",
    "dependencies": {
       "bcrypt": "^3.0.6",
+      "chai": "^4.2.0",
+      "chai-http": "^4.3.0",
+      "mocha": "^6.1.4",
       "mongodb": "^3.2.7",
+      "path": "^0.12.7",
       "reflect-metadata": "^0.1.10",
       "restify": "^8.3.3",
+      "restify-router": "^0.5.1",
       "typeorm": "0.2.18"
    },
    "devDependencies": {
+      "@types/bcrypt": "^3.0.0",
+      "@types/chai": "^4.1.7",
+      "@types/mocha": "^5.2.7",
       "@types/mongodb": "^3.1.28",
       "@types/node": "^8.0.29",
       "@types/restify": "^7.2.11",
