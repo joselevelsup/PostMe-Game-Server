@@ -1,11 +1,11 @@
 {
    "type": "mongodb",
-   "database": "test",
+   "database": "postme",
    "synchronize": true,
-   "logging": false,
+   "logging": true,
 	 "useNewUrlParser": true,
    "entities": [
-      "build/entity/**/*.js"
+      "src/entity/**/*.ts"
    ],
    "migrations": [
       "src/migration/**/*.ts"

@@ -8,12 +8,16 @@ const server : any = restify.createServer({
 	version: "0.0.1"
 });
 
+server.use(restify.plugins.bodyParser());
+
 roomRouter.applyRoutes(server);
 
 createConnection().then(() => {
-	server.listen(8080, () => {
-		console.log("server running");
-	})
+	server.listen(8080);
 }).catch((err: any) => {
 	console.log(err);
 })
+
+
+
+export default server;

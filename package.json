@@ -4,9 +4,9 @@
    "description": "",
    "main": "build/index.js",
    "scripts": {
-      "test": "echo \"Error: no test specified\" && exit 1",
-      "start:dev": "ts-node src/index.ts",
-      "start": "node build/index.js",
+      "test": "mocha -r ts-node/register src/tests/**/*.ts --exit",
+      "start:dev": "ts-node src/server.ts",
+      "start": "node build/server.js",
       "build": "tsc"
    },
    "repository": {
@@ -30,6 +30,7 @@
       "reflect-metadata": "^0.1.10",
       "restify": "^8.3.3",
       "restify-router": "^0.5.1",
+      "socket.io": "^2.2.0",
       "typeorm": "0.2.18"
    },
    "devDependencies": {
@@ -39,6 +40,7 @@
       "@types/mongodb": "^3.1.28",
       "@types/node": "^8.0.29",
       "@types/restify": "^7.2.11",
+      "@types/socket.io": "^2.1.2",
       "ts-node": "^3.3.0",
       "typescript": "3.3.3333"
    }

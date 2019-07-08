@@ -24,4 +24,10 @@ export class PostMeRoom {
 
 	// @Column(type => Array<Messages>)
 	// messages: Array<Messages>
+	
+	constructor(roomNumber: string, roomType: RoomType, members: Array<ObjectID>){
+		this.roomNumber = roomNumber;
+		this.roomType = roomType;
+		this.members = members || []
+	}
 }
