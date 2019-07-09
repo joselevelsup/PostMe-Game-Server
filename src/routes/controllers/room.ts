@@ -1,5 +1,6 @@
 import { Request, Response, Next } from "restify";
 import { getMongoManager } from "typeorm";
+import * as bcrypt from "bcrypt";
 import { PostMeRoom } from  "../../entity/PostMeRoom";
 import { RoomType } from "../../utils";
 
@@ -39,10 +40,16 @@ export const createARoom = (req: Request, res: Response, next: Next): void => {
 	const RoomManager = getMongoManager();
 	const { 
 		roomNumber,
-		roomType
+		roomType,
+		passwordEnabled,
+		password
 	} = req.body;
 
-	const newRoom = new PostMeRoom(roomNumber, roomType, []);
+	const newRoom = new PostMeRoom(roomNumber, roomType, passwordEnabled);
+
+	if(newRoom.passwordEnabled){
+		newRoom.password = bcrypt.hashSync(password, 9);
+	}
 
 	RoomManager.save(newRoom).then((data: any) => {
 		res.json(200, {
@@ -52,6 +59,22 @@ export const createARoom = (req: Request, res: Response, next: Next): void => {
 		res.json(500, {
 			"success": false,
 			"error": err
+		});
+	});
+}
+
+export const deleteARoom = (req: Request, res: Response, next: Next): void => {
+	const RoomManager = getMongoManager();
+
+	RoomManager.findOneAndDelete(PostMeRoom, {
+		roomNumber: req.params.roomId
+	}).then((data: any) => {
+		res.json(200, {
+			"success": true
+		});
+	}).catch((err: any) => {
+		res.json(500, {
+			"success": false
 		});
 	});
 }

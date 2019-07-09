@@ -22,12 +22,19 @@ export class PostMeRoom {
 	@Column()
 	members: Array<ObjectID>;
 
+	@Column()
+	passwordEnabled: boolean;
+
+	@Column()
+	password: string;
+
 	// @Column(type => Array<Messages>)
 	// messages: Array<Messages>
 	
-	constructor(roomNumber: string, roomType: RoomType, members: Array<ObjectID>){
+	constructor(roomNumber: string, roomType: RoomType, passwordEnabled: boolean, members?: Array<ObjectID>){
 		this.roomNumber = roomNumber;
 		this.roomType = roomType;
-		this.members = members || []
+		this.passwordEnabled = passwordEnabled;
+		this.members = members || [];
 	}
 }

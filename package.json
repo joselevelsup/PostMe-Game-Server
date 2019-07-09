@@ -29,6 +29,7 @@
       "path": "^0.12.7",
       "reflect-metadata": "^0.1.10",
       "restify": "^8.3.3",
+      "restify-jwt-community": "^1.0.13",
       "restify-router": "^0.5.1",
       "socket.io": "^2.2.0",
       "typeorm": "0.2.18"
