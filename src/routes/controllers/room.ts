@@ -1,12 +1,10 @@
 import { Request, Response, Next } from "restify";
-import { getMongoManager } from "typeorm";
 import * as bcrypt from "bcrypt";
-import { PostMeRoom } from  "../../entity/PostMeRoom";
+import { PostMeRoom, Room} from "../../models/PostMeRoom"
 import { RoomType } from "../../utils";
 
 export const getAllPublicRooms = (req: Request, res: Response, next: Next): void => {
-	const RoomManager = getMongoManager();
-	RoomManager.find(PostMeRoom, {
+	Room.find({
 		roomType: RoomType.Public
 	}).then((data: any) => {
 		res.json(200, {
@@ -21,9 +19,7 @@ export const getAllPublicRooms = (req: Request, res: Response, next: Next): void
 }
 
 export const getOneRoom = (req: Request, res: Response, next: Next): void => {
-	const RoomManager = getMongoManager();
-
-	RoomManager.find(PostMeRoom, {
+	Room.findOne({
 		roomNumber: req.params.roomId
 	}).then((data: any) => {
 		res.json(200, {
@@ -37,7 +33,6 @@ export const getOneRoom = (req: Request, res: Response, next: Next): void => {
 }
 
 export const createARoom = (req: Request, res: Response, next: Next): void => {
-	const RoomManager = getMongoManager();
 	const { 
 		roomNumber,
 		roomType,
@@ -45,13 +40,13 @@ export const createARoom = (req: Request, res: Response, next: Next): void => {
 		password
 	} = req.body;
 
-	const newRoom = new PostMeRoom(roomNumber, roomType, passwordEnabled);
+	const newRoom = new Room({roomNumber, roomType, passwordEnabled});
 
 	if(newRoom.passwordEnabled){
 		newRoom.password = bcrypt.hashSync(password, 9);
 	}
 
-	RoomManager.save(newRoom).then((data: any) => {
+	newRoom.save().then((data: any) => {
 		res.json(200, {
 			"success": true
 		});
@@ -64,14 +59,31 @@ export const createARoom = (req: Request, res: Response, next: Next): void => {
 }
 
 export const deleteARoom = (req: Request, res: Response, next: Next): void => {
-	const RoomManager = getMongoManager();
-
-	RoomManager.findOneAndDelete(PostMeRoom, {
+	Room.findOneAndDelete({
 		roomNumber: req.params.roomId
 	}).then((data: any) => {
 		res.json(200, {
 			"success": true
 		});
+	}).catch((err: any) => {
+		res.json(500, {
+			"success": false
+		});
+	});
+}
+
+export const addMember = (req: Request, res: Response, next: Next): void => {
+	Room.findOneAndUpdate({
+		roomNumber: req.params.roomId
+	}, {
+		$push: {
+			members: [ req.body.userId ]
+		}
+	}).then((data: any) => {
+		console.log(data);
+		res.json(200, {
+			"success": true
+		})
 	}).catch((err: any) => {
 		res.json(500, {
 			"success": false

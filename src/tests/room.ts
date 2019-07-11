@@ -51,6 +51,12 @@ describe("Rooms", (): void => {
 		});
 	});
 
+	it("should add a member to room", (done: any): void => {
+		chai.request(server).put("/room/0a1b2c").send({
+			userId: ""
+		})
+	})
+
 	it("should make a private room", (done: any): void => {
 		chai.request(server).post("/room").send({
 			roomNumber: "01ab2d3",

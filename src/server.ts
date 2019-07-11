@@ -1,8 +1,8 @@
 import * as restify from "restify";
-import { createConnection } from "typeorm";
+import * as mongoose from "mongoose";
 import rjwt = require("restify-jwt-community");
 import roomRouter from "./routes/room";
-import authRouter from "./routes/auth";
+// import authRouter from "./routes/auth";
 
 const server : any = restify.createServer({
 	name: "PostMe API",
@@ -18,15 +18,12 @@ server.use(rjwt({
 	path: ["/login", "/signup"]
 }));
 
-authRouter.applyRoutes(server);
-
+// authRouter.applyRoutes(server);
 roomRouter.applyRoutes(server);
 
-createConnection().then(() => {
-	server.listen(8080);
-}).catch((err: any) => {
-	console.log(err);
-})
+mongoose.connect("mongodb://localhost:27017/postme", { useNewUrlParser: true });
+
+server.listen(8080);
 
 
 

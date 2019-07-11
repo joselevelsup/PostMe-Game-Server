@@ -3,7 +3,7 @@ import {
 	getAllPublicRooms,
 	createARoom,
 	getOneRoom,
-	editRoom,
+	// editRoom,
 	deleteARoom
 } from "./controllers/room";
 
@@ -15,7 +15,9 @@ roomRouter.get("/room/:roomId", getOneRoom)
 
 roomRouter.post("/room", createARoom);
 
-roomRouter.put("/room/:roomId", editRoom);
+// roomRouter.put("/room/:roomId", editRoom);
+
+roomRouter.put("/room/:roomId", addMember);
 
 roomRouter.del("/room/:roomId", deleteARoom);
 
